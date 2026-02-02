@@ -17,6 +17,57 @@
   - `npm run test-calculator`
 */
 
-class Calculator { }
+class Calculator { 
+  constructor(result = 0) {
+    this.result = result;
+  }
+  
+  add(n) {
+    this.result += n;
+  }
+
+  subtract(n) {
+    this.result -= n;
+  }
+
+  multiply(n) {
+    this.result *= n;
+  }
+
+  divide(n) {
+    if (n === 0) {
+      throw new Error("Division by zero is wrong");
+    }
+    else {
+      this.result /= n;
+    }
+  }
+
+  clear() {
+    this.result = 0;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(str) {
+    str = str.replace(/\s/g, '')
+    if (!/^[0-9+\-*/().]+$/.test(str)) {
+      throw new Error("Invalid characters")
+    }
+
+    // this line is the whole abstract behind calculate()
+    const value = Function(`"use strict"; return (${str})`)();
+
+    if (!isFinite(value)) {
+      throw new Error("Division by zero is wrong")
+    }
+
+    this.result = value;
+
+    return this.result;
+  }
+}
 
 module.exports = Calculator;
