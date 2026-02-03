@@ -6,9 +6,9 @@
 let counter = 0;
 
 
-const updateCounter = () => {
-  counter++;
-  console.log(counter);
-};
+function timer() {
+  console.log(counter++);
+  ;
+}
 
-setInterval(updateCounter, 1000);
+setInterval(timer, 1000)
